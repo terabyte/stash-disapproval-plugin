@@ -1,3 +1,9 @@
+# Stash Disapproval Plugin
+
+Bitbucket Server 4.X Build Status: [![Build Status](https://travis-ci.org/terabyte/stash-disapproval-plugin.svg?branch=master)](https://travis-ci.org/terabyte/stash-disapproval-plugin)
+
+Stash 3.X Build Status: [![Build Status](https://travis-ci.org/terabyte/stash-disapproval-plugin.svg?branch=stash-3.x-backports)](https://travis-ci.org/terabyte/stash-disapproval-plugin)
+
 Stash Disapproval Plugin is designed to enable users to voluntarily block a
 pull request (so other users cannot merge it until they are 'ready').
 
