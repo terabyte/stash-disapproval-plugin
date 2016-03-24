@@ -57,7 +57,7 @@ public class PluginLoggerFactory {
         context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
         // store the home dir to use for relative paths
-        context.putProperty("stash.home", homeDir);
+        context.putProperty("bitbucket.home", homeDir);
 
         JoranConfigurator configurator = new JoranConfigurator();
         configurator.setContext(context);

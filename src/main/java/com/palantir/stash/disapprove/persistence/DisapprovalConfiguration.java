@@ -13,6 +13,8 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.persistence;
 
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.repository.RepositoryService;
 import net.java.ao.Accessor;
 import net.java.ao.Entity;
 import net.java.ao.Implementation;
@@ -23,9 +25,6 @@ import net.java.ao.schema.Ignore;
 import net.java.ao.schema.NotNull;
 import net.java.ao.schema.Table;
 import net.java.ao.schema.Unique;
-
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.repository.RepositoryService;
 
 @Table("DPConfig001")
 @Preload

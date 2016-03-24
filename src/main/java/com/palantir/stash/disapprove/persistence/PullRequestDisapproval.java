@@ -13,6 +13,10 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.persistence;
 
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.pull.PullRequestService;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.repository.RepositoryService;
 import net.java.ao.Accessor;
 import net.java.ao.Entity;
 import net.java.ao.Implementation;
@@ -23,10 +27,6 @@ import net.java.ao.schema.Ignore;
 import net.java.ao.schema.NotNull;
 import net.java.ao.schema.Table;
 
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.pull.PullRequestService;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.repository.RepositoryService;
 
 @Table("PRDisapproval001")
 @Preload

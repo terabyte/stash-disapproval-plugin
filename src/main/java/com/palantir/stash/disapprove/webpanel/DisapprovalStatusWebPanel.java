@@ -13,19 +13,17 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.webpanel;
 
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.plugin.web.model.WebPanel;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.sql.SQLException;
 import java.util.Map;
-
 import org.slf4j.Logger;
-
-import com.atlassian.plugin.web.model.WebPanel;
-import com.atlassian.stash.pull.PullRequest;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
-import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 
 public class DisapprovalStatusWebPanel implements WebPanel {
 

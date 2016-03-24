@@ -13,21 +13,18 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.mergecheck;
 
-import java.sql.SQLException;
-
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.scm.pull.MergeRequest;
-import com.atlassian.stash.scm.pull.MergeRequestCheck;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.scm.pull.MergeRequest;
+import com.atlassian.bitbucket.scm.pull.MergeRequestCheck;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
 import com.palantir.stash.disapprove.persistence.DisapprovalConfiguration;
 import com.palantir.stash.disapprove.persistence.DisapprovalMode;
 import com.palantir.stash.disapprove.persistence.PersistenceManager;
 import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
+import java.sql.SQLException;
+import javax.annotation.Nonnull;
+import org.slf4j.Logger;
 
 /**
  * This class is a MergeRequestCheck to disable merging where the target repo

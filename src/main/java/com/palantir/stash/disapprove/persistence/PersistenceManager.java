@@ -13,18 +13,14 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.persistence;
 
-import java.sql.SQLException;
-
-import javax.servlet.http.HttpServletRequest;
-
-import net.java.ao.DBParam;
-
-import org.slf4j.Logger;
-
 import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.repository.Repository;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.repository.Repository;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import net.java.ao.DBParam;
+import org.slf4j.Logger;
 
 public class PersistenceManager {
 

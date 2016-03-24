@@ -15,15 +15,15 @@
     </organization>
 
     <name>stash-disapprove-plugin</name>
-    <description>This is the Disapproval Plugin for Atlassian Stash.  It lets you "nack" a pull request so it will not be merged before you are ready.</description>
+    <description>This is the Disapproval Plugin for Atlassian Bitbucket.  It lets you "nack" a pull request so it will not be merged before you are ready.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.atlassian.stash</groupId>
-                <artifactId>stash-parent</artifactId>
-                <version>${stash.version}</version>
+                <groupId>com.atlassian.bitbucket.server</groupId>
+                <artifactId>bitbucket-parent</artifactId>
+                <version>${bitbucket.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -37,23 +37,29 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.stash</groupId>
-            <artifactId>stash-api</artifactId>
+            <groupId>com.atlassian.bitbucket.server</groupId>
+            <artifactId>bitbucket-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.stash</groupId>
-            <artifactId>stash-spi</artifactId>
+            <groupId>com.atlassian.bitbucket.server</groupId>
+            <artifactId>bitbucket-spi</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.atlassian.stash</groupId>
-            <artifactId>stash-page-objects</artifactId>
+            <groupId>com.atlassian.bitbucket.server</groupId>
+            <artifactId>bitbucket-page-objects</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.bitbucket.server</groupId>
+            <artifactId>bitbucket-web-common</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -63,9 +69,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -93,14 +98,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${google.guava.libversion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- used for Condition interface, needed for stash 3.3.0+ -->
-        <dependency>
-            <groupId>com.atlassian.stash</groupId>
-            <artifactId>stash-web-common</artifactId>
-            <version>${stash.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -147,7 +144,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <!-- <version>1.0.11</version>  version from stash-parent/pom.xml -->
             <scope>provided</scope>
         </dependency>
 
@@ -177,7 +173,7 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-stash-plugin</artifactId>
+                <artifactId>bitbucket-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -185,7 +181,7 @@
                         <product>
                             <id>stash</id>
                             <instanceId>stash</instanceId>
-                            <version>${stash.version}</version>
+                            <version>${bitbucket.version}</version>
                             <dataVersion>${stash.data.version}</dataVersion>
                         </product>  
                     </products>
@@ -202,13 +198,13 @@
     </build>
     
     <properties>
-        <stash.version>3.6.0</stash.version>
-        <stash.data.version>3.6.0</stash.data.version>
-        <amps.version>5.0.4</amps.version>
+        <bitbucket.version>4.1.0</bitbucket.version>
+        <bitbucket.data.version>4.1.0</bitbucket.data.version>
+        <amps.version>6.1.0</amps.version>
         <plugin.testrunner.version>1.1.4</plugin.testrunner.version>
         <!-- TODO: I manually figured out this version - can we automatically figure it out? -->
-        <ao.version>0.21.2</ao.version>
-        <google.guava.libversion>10.0.1</google.guava.libversion>
+        <ao.version>1.1.3</ao.version>
+        <google.guava.libversion>18.0</google.guava.libversion>
     </properties>
     
     <profiles>

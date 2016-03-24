@@ -13,8 +13,19 @@
 // limitations under the License.
 package ut.com.palantir.stash;
 
+import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.test.TestActiveObjects;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.pull.PullRequestRef;
+import com.atlassian.bitbucket.pull.PullRequestService;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.repository.RepositoryService;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.persistence.DisapprovalConfiguration;
+import com.palantir.stash.disapprove.persistence.DisapprovalMode;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 import javax.servlet.http.HttpServletRequest;
-
 import junit.framework.Assert;
 import net.java.ao.EntityManager;
 import net.java.ao.test.jdbc.Data;
@@ -22,28 +33,13 @@ import net.java.ao.test.jdbc.DatabaseUpdater;
 import net.java.ao.test.jdbc.DynamicJdbcConfiguration;
 import net.java.ao.test.jdbc.Jdbc;
 import net.java.ao.test.junit.ActiveObjectsJUnitRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import ut.com.palantir.stash.PersistenceManagerTest.DataStuff;
-
-import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.activeobjects.test.TestActiveObjects;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.pull.PullRequestRef;
-import com.atlassian.stash.pull.PullRequestService;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.repository.RepositoryService;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.persistence.DisapprovalConfiguration;
-import com.palantir.stash.disapprove.persistence.DisapprovalMode;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
-import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 
 @RunWith(ActiveObjectsJUnitRunner.class)
 @Jdbc(DynamicJdbcConfiguration.class)
@@ -98,8 +94,8 @@ public class PersistenceManagerTest {
         Mockito.when(pr.getFromRef()).thenReturn(fromRef);
         Mockito.when(pr.getId()).thenReturn(PR_ID);
         Mockito.when(toRef.getRepository()).thenReturn(repo);
-        Mockito.when(toRef.getLatestChangeset()).thenReturn(TO_SHA);
-        Mockito.when(fromRef.getLatestChangeset()).thenReturn(FROM_SHA);
+        Mockito.when(toRef.getLatestCommit()).thenReturn(TO_SHA);
+        Mockito.when(fromRef.getLatestCommit()).thenReturn(FROM_SHA);
         Mockito.when(repo.getId()).thenReturn(REPO_ID);
 
         Mockito.when(prs.getById(Mockito.anyInt(), Mockito.anyLong())).thenReturn(pr);

@@ -13,34 +13,31 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.servlet;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.net.URI;
-import java.sql.SQLException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
-import org.slf4j.Logger;
-
+import com.atlassian.bitbucket.AuthorisationException;
+import com.atlassian.bitbucket.auth.AuthenticationContext;
+import com.atlassian.bitbucket.nav.NavBuilder;
+import com.atlassian.bitbucket.permission.Permission;
+import com.atlassian.bitbucket.permission.PermissionValidationService;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.pull.PullRequestService;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.request.RequestManager;
 import com.atlassian.sal.api.auth.LoginUriProvider;
-import com.atlassian.stash.exception.AuthorisationException;
-import com.atlassian.stash.nav.NavBuilder;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.pull.PullRequestService;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.request.RequestManager;
-import com.atlassian.stash.user.Permission;
-import com.atlassian.stash.user.PermissionValidationService;
-import com.atlassian.stash.user.StashAuthenticationContext;
 import com.google.common.collect.ImmutableMap;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
 import com.palantir.stash.disapprove.persistence.DisapprovalConfiguration;
 import com.palantir.stash.disapprove.persistence.PersistenceManager;
 import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
+import java.io.IOException;
+import java.io.Writer;
+import java.net.URI;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
+import org.slf4j.Logger;
 
 public class DisapprovalServlet extends HttpServlet {
 
@@ -183,7 +180,7 @@ public class DisapprovalServlet extends HttpServlet {
             log.debug("User not logged in", notLoggedInException);
             return null;
         }
-        StashAuthenticationContext ac = rm.getRequestContext().getAuthenticationContext();
+        AuthenticationContext ac = rm.getRequestContext().getAuthenticationContext();
         final String user = ac.getCurrentUser().getName();
 
         log.debug("User {} logged in", user);

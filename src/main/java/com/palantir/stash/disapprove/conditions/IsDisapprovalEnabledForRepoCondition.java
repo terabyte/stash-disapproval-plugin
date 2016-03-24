@@ -13,17 +13,15 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.conditions;
 
-import java.sql.SQLException;
-import java.util.Map;
-
-import org.slf4j.Logger;
-
+import com.atlassian.bitbucket.repository.Repository;
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.web.Condition;
-import com.atlassian.stash.repository.Repository;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
 import com.palantir.stash.disapprove.persistence.DisapprovalConfiguration;
 import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import java.sql.SQLException;
+import java.util.Map;
+import org.slf4j.Logger;
 
 public class IsDisapprovalEnabledForRepoCondition implements Condition {
 

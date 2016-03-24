@@ -9,11 +9,11 @@
 {template .repositoryConfigurationPanel}
 <html>
 <head>
-    <meta name="decorator" content="stash.repository.settings">
+    <meta name="decorator" content="bitbucket.repository.settings">
     <meta name="projectKey" content="{$repository.project.key}">
     <meta name="repositorySlug" content="{$repository.slug}">
     <meta name="activeTab" content="repository-settings-git-ops-panel">
-    <title>{{stash_i18n('stash.web.repository.git-ops.title', 'Disapproval settings for {0} / {1}', $repository.project.name, $repository.name)}}</title>
+    <title>Disapproval settings for $repository.project.name / $repository.name</title>
 </head>
 <body>
 {if $error}
@@ -23,7 +23,7 @@
     {param content}
         {call aui.group.item}
             {param content}
-                <h2>{stash_i18n('stash.web.repository.disapproval.heading', 'Disapproval Settings')}</h2>
+                <h2>Disapproval Settings</h2>
             {/param}
         {/call}
     {/param}
@@ -34,18 +34,18 @@
       {param action: '' /}
       {param content}
         {call aui.form.checkboxField}
-          {param legendContent: stash_i18n('stash.web.stash.enabled.button.description', 'Enable Disapproval') /}
+          {param legendContent: 'Enable Disapproval' /}
           {param fields: [[
             'id': 'enabled',
-            'labelText': stash_i18n('stash.web.stash.enabled.button.label', 'Enable Disapproval'),
+            'labelText': 'Enable Disapproval',
             'isChecked': $isEnabled
             ]] /}
         {/call}
         {call aui.form.checkboxField}
-          {param legendContent: stash_i18n('stash.web.stash.enable-strict-mode.button.description', 'Enable strict disapproval mode') /}
+          {param legendContent: 'Enable strict disapproval mode' /}
           {param fields: [[
             'id': 'strictModeEnabled',
-            'labelText': stash_i18n('stash.web.stash.enable-strict-mode.button.label', 'Strict Mode'),
+            'labelText': 'Strict Mode',
             'isChecked': $isStrict
             ]] /}
         {/call}
@@ -54,7 +54,7 @@
           {param content}
             {call aui.form.submit}
               {param id: 'submit' /}
-              {param text: stash_i18n('stash.web.stash.disapproval.submit', 'Save') /}
+              {param text: 'Save' /}
               {param type: 'submit' /}
             {/call}
           {/param}

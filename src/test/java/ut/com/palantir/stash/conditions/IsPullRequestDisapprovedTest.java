@@ -13,21 +13,19 @@
 // limitations under the License.
 package ut.com.palantir.stash.conditions;
 
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.google.common.collect.ImmutableMap;
+import com.palantir.stash.disapprove.conditions.IsPullRequestDisapproved;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import com.atlassian.stash.pull.PullRequest;
-import com.google.common.collect.ImmutableMap;
-import com.palantir.stash.disapprove.conditions.IsPullRequestDisapproved;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
-import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
 
 public class IsPullRequestDisapprovedTest {
 

@@ -13,27 +13,24 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.servlet;
 
+import com.atlassian.bitbucket.AuthorisationException;
+import com.atlassian.bitbucket.auth.AuthenticationContext;
+import com.atlassian.bitbucket.permission.PermissionValidationService;
+import com.atlassian.bitbucket.request.RequestManager;
+import com.atlassian.sal.api.auth.LoginUriProvider;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URLConnection;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
-
-import com.atlassian.sal.api.auth.LoginUriProvider;
-import com.atlassian.stash.exception.AuthorisationException;
-import com.atlassian.stash.request.RequestManager;
-import com.atlassian.stash.user.PermissionValidationService;
-import com.atlassian.stash.user.StashAuthenticationContext;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
 
 public class StaticContentServlet extends HttpServlet {
 
@@ -106,7 +103,7 @@ public class StaticContentServlet extends HttpServlet {
             log.debug("User not logged in", notLoggedInException);
             return null;
         }
-        StashAuthenticationContext ac = rm.getRequestContext().getAuthenticationContext();
+        AuthenticationContext ac = rm.getRequestContext().getAuthenticationContext();
         final String user = ac.getCurrentUser().getName();
 
         log.debug("User {} logged in", user);

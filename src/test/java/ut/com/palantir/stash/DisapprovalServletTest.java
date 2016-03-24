@@ -13,17 +13,23 @@
 // limitations under the License.
 package ut.com.palantir.stash;
 
+import com.atlassian.bitbucket.auth.AuthenticationContext;
+import com.atlassian.bitbucket.permission.PermissionValidationService;
+import com.atlassian.bitbucket.request.RequestContext;
+import com.atlassian.bitbucket.request.RequestManager;
+import com.atlassian.bitbucket.user.ApplicationUser;
+import com.atlassian.sal.api.auth.LoginUriProvider;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import com.palantir.stash.disapprove.servlet.DisapprovalServlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -31,16 +37,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
-import com.atlassian.sal.api.auth.LoginUriProvider;
-import com.atlassian.stash.request.RequestContext;
-import com.atlassian.stash.request.RequestManager;
-import com.atlassian.stash.user.PermissionValidationService;
-import com.atlassian.stash.user.StashAuthenticationContext;
-import com.atlassian.stash.user.StashUser;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
-import com.palantir.stash.disapprove.servlet.DisapprovalServlet;
 
 public class DisapprovalServletTest {
 
@@ -70,9 +66,9 @@ public class DisapprovalServletTest {
     @Mock
     private RequestContext rc;
     @Mock
-    private StashAuthenticationContext sac;
+    private AuthenticationContext sac;
     @Mock
-    private StashUser su;
+    private ApplicationUser su;
     @Mock
     private ServletOutputStream sos;
 

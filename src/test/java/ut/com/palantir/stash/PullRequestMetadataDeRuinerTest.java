@@ -13,19 +13,18 @@
 // limitations under the License.
 package ut.com.palantir.stash;
 
+import com.atlassian.bitbucket.event.pull.PullRequestEvent;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.pull.PullRequestRef;
+import com.atlassian.bitbucket.repository.Repository;
+import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
+import com.palantir.stash.disapprove.mergecheck.PullRequestMetadataDeRuiner;
+import com.palantir.stash.disapprove.persistence.PersistenceManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import com.atlassian.stash.event.pull.PullRequestEvent;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.pull.PullRequestRef;
-import com.atlassian.stash.repository.Repository;
-import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
-import com.palantir.stash.disapprove.mergecheck.PullRequestMetadataDeRuiner;
-import com.palantir.stash.disapprove.persistence.PersistenceManager;
 
 public class PullRequestMetadataDeRuinerTest {
 
@@ -61,7 +60,7 @@ public class PullRequestMetadataDeRuinerTest {
     @Test
     public void testMetadataExists() throws Exception {
 
-        Mockito.when(pr.getId()).thenReturn(null);
+        Mockito.when(pr.getId()).thenReturn(0L);
         prmd.listenToPullRequestEvents(pre);
 
         Mockito.verify(pm, Mockito.never()).getDisapprovalConfiguration(Mockito.any(Repository.class));

@@ -13,14 +13,12 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.persistence;
 
+import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.repository.RepositoryService;
 import java.sql.SQLException;
-
 import net.java.ao.DBParam;
 import net.java.ao.Query;
-
-import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.repository.RepositoryService;
 
 public class DisapprovalConfigurationImpl {
 

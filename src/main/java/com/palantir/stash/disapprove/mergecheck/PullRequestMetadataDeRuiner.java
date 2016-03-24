@@ -13,14 +13,13 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.mergecheck;
 
-import org.slf4j.Logger;
-
+import com.atlassian.bitbucket.event.pull.PullRequestEvent;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.repository.Repository;
 import com.atlassian.event.api.EventListener;
-import com.atlassian.stash.event.pull.PullRequestEvent;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.repository.Repository;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
 import com.palantir.stash.disapprove.persistence.PersistenceManager;
+import org.slf4j.Logger;
 
 /**
  * This class ensures that the metadata for a PullRequestDisapproval is created at the time a pull request is created,
@@ -49,7 +48,8 @@ public class PullRequestMetadataDeRuiner {
     public void listenToPullRequestEvents(PullRequestEvent pre) {
         PullRequest pr = pre.getPullRequest();
         Repository repo = pr.getToRef().getRepository();
-        if (pr.getId() == null) {
+        // XXX: migration: this can't be null anymore, so what does it mean not to be "materialized"? maybe this is impossible now?
+        if (pr.getId() == 0) {
             log.debug("Got NULL PR_ID, ignoring until PR is fully materialized");
             return;
         }

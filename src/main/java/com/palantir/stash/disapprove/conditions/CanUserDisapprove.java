@@ -13,21 +13,19 @@
 // limitations under the License.
 package com.palantir.stash.disapprove.conditions;
 
-import java.sql.SQLException;
-import java.util.Map;
-
-import org.slf4j.Logger;
-
+import com.atlassian.bitbucket.permission.Permission;
+import com.atlassian.bitbucket.permission.PermissionService;
+import com.atlassian.bitbucket.pull.PullRequest;
+import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.user.ApplicationUser;
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.web.Condition;
-import com.atlassian.stash.pull.PullRequest;
-import com.atlassian.stash.repository.Repository;
-import com.atlassian.stash.user.Permission;
-import com.atlassian.stash.user.PermissionService;
-import com.atlassian.stash.user.StashUser;
 import com.palantir.stash.disapprove.logger.PluginLoggerFactory;
 import com.palantir.stash.disapprove.persistence.PersistenceManager;
 import com.palantir.stash.disapprove.persistence.PullRequestDisapproval;
+import java.sql.SQLException;
+import java.util.Map;
+import org.slf4j.Logger;
 
 /**
  * A condition which checks if the user can disapprove or remove disapproval for the PR
@@ -63,12 +61,12 @@ public class CanUserDisapprove implements Condition {
         final PullRequest pr = (PullRequest) context.get("pullRequest");
         final Repository repo = pr.getToRef().getRepository();
         // No idea if I need to do all this - in the context I care about, at least, the correct one is "currentUser", but I've seen other conditions use these other keys.
-        StashUser user = (StashUser) context.get("currentUser");
+        ApplicationUser user = (ApplicationUser) context.get("currentUser");
         if (user == null) {
-            user = (StashUser) context.get("user");
+            user = (ApplicationUser) context.get("user");
         }
         if (user == null) {
-            user = (StashUser) context.get("accountUser");
+            user = (ApplicationUser) context.get("accountUser");
         }
         if (user == null) {
             throw new IllegalStateException("Unable to get user!");
