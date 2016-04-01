@@ -1,4 +1,4 @@
-require(['model/page-state', 'util/navbuilder', 'jquery'], function(state, nav, $) {
+require(['bitbucket/util/state', 'bitbucket/util/navbuilder', 'jquery'], function(state, nav, $) {
 
 	// http://stackoverflow.com/questions/6285491/are-there-universal-alternatives-to-window-onload-without-using-frameworks
 	// Decided to do with jquery, to avoid messing up the window.onload
@@ -6,11 +6,13 @@ require(['model/page-state', 'util/navbuilder', 'jquery'], function(state, nav, 
     	$(".disapproval-face").css({"color":"#AA0000", "font-weight":"bolder"})
     	
     	
+        alert("foo");
+        return;
     	baseUrl = nav.pluginServlets().build()
-        repoId = state.getPullRequest().attributes.toRef.attributes.repository.id;
-        commit = state.getPullRequest().attributes.fromRef.attributes.latestChangeset;
-	    prId = state.getPullRequest().attributes.id;
-	    version = state.getPullRequest().attributes.version;
+        repoId = state.getPullRequest().toRef.repository.id;
+        commit = state.getPullRequest().fromRef.latestCommit;
+        prId = state.getPullRequest().id;
+        version = state.getPullRequest().version;
         prd = $.get(baseUrl + '/disapproval/disapprove/' + repoId + '/' + prId)
         
         // Surface to user who disapproved the request and make its status more obvious
